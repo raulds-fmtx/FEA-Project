@@ -6,7 +6,7 @@ An FEA Python Program for Euler Bernoulli Beam Analysis.
 
 ## Usage 
 
-To use this program, execute `__main__.py` in an environment with an Anaconda3 enabled interpreter. For the main function set the parameters as the desired input and output file names.
+To use this program, execute the command `python -m FEA_Project input_file.csv output_file.csv` in an environment with an Anaconda3 enabled interpreter.
 
 ## Packages
 

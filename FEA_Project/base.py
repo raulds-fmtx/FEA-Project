@@ -2,7 +2,7 @@
 FEA-Project base module.
 
 This is the principal module of the FEA-Project project.
-Contains classes and objects.
+Contains classes, objects, and methods.
 
 """
 

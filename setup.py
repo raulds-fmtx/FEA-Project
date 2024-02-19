@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 
 def read(*paths, **kwargs):
     """Read the contents of a text file safely.
-    >>> read("FEA_Project", "VERSION")
+    >>> read("FEA_Project", "0.1.0")
     '0.1.0'
     >>> read("README.md")
     ...
@@ -36,8 +36,8 @@ setup(
     url="https://github.com/raulds-fmtx/FEA-Project.git",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
-    author="Raul Santos",
-    packages=find_packages(exclude=["input", "output"]),
+    author="raulds-fmtx",
+    packages=["FEA_Project"],
     entry_points={
         "console_scripts": ["FEA_Project = FEA_Project.__main__:main"]
     },
