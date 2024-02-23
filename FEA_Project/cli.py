@@ -1,21 +1,27 @@
 """CLI interface for project_name project."""
 
-from FEA_Project.base import *
+from FEA_Project.read import *
+import sys
 
-def main():  # pragma: no cover
+def main():
     """
     The main function executes on commands:
-    `python -m project_name` and `$ project_name `.
-
-    This is your program's entry point.
-
-    You can change this function to do whatever you want.
-    Examples:
-        * Run a test suite
-        * Run a server
-        * Do some other stuff
-        * Run a command line application (Click, Typer, ArgParse)
-        * List all available tasks
-        * Run an application (Flask, FastAPI, Django, etc.)
+    `python -m FEA_Project inFile.txt outFile.txt`.
     """
-    print("This will do something")
+    
+    # Open input and output files
+    inFile = open("./input/" + sys.argv[1], "r")
+    outFile = open("./output/" + sys.argv[2], "w")
+    
+    # Process data
+    elementList, numNodes = readMesh(inFile,outFile) # list of elements and number of nodes
+    E,h,w = readProperties(inFile,outFile) # properties of the beam
+    Beam1 = Beam(E,h,w,numNodes,elementList) # construct beam
+    constraintList = readConstraints(inFile,outFile,numNodes) # list of constraints
+    loadArr = readLoads(inFile,outFile,numNodes) # array of applied loads at each dof
+
+    # Close files
+    inFile.close()
+    outFile.close()
+    
+    
