@@ -23,3 +23,8 @@ List of DOF set to 0:
 Point Loads:
 5.0 at DOF 7
 
+Nodal Displacements:
+    1  1.1429e-29 -1.4281e-04
+    2  2.1429e-30 -7.1429e-30
+    3 -8.5714e-30  3.5704e-05
+    4  3.0943e-03 -3.9274e-04

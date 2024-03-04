@@ -85,7 +85,7 @@ def readProperties(inFile,outFile) :
     
     return E,h,w
 
-def readConstraints(inFile,outFile,numNodes) :
+def readConstraints(inFile,outFile,numNodes : int) :
     '''Echo prints collected and formatted data from inFile into outFile
         returns a boolean lists
         
@@ -123,7 +123,7 @@ def readConstraints(inFile,outFile,numNodes) :
     
     return constraintList
 
-def readLoads(inFile,outFile,numNodes) :
+def readLoads(inFile,outFile,numNodes : int) :
     '''Echo prints collected and formatted data from inFile into outFile
         returns a numpy array of applied loads at each dof
         
@@ -156,3 +156,30 @@ def readLoads(inFile,outFile,numNodes) :
     outFile.write("\n")
     
     return LoadArr
+
+def writeDisps(outFile,nodalDisp : np.ndarray,numNodes: int) :
+    '''Writes formatted nodal displacement data into outFile
+        
+        Parameters
+        ----------
+        outFile : file object
+            file object enabling writeDisps() to record the formatted data
+        nodalDisp : np.ndarray, shape = (numNodes*2,1), dtype = float
+            Array of calculated nodal displacements
+        numNodes : int
+            Number of nodes in the beam
+            
+        Return
+        ------
+        LoadArr : np.array, shape = (numNodes*2,1), dtype = float
+            numpy array of applied loads at each dof
+        '''
+    
+    # Write header
+    outFile.write('Nodal Displacements:\n')
+    # Format Nodal Displacements
+    for i in range(numNodes):
+        disp1 = '{:.4e}'.format(nodalDisp[i*2,0])
+        disp2 = '{:.4e}'.format(nodalDisp[i*2+1,0])
+        outFile.write('{:>5} {:>11} {:>11}\n'.format(i+1,disp1,disp2))
+    
