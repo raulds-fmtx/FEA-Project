@@ -1,0 +1,20 @@
+4   3           # Number of Nodes   Number of Elements
+1   10          # Node #        x-coordinate
+2   30
+3   20
+4   0
+
+1   4 1         # element #     connectivity of element
+2   1 3
+3   3 2
+
+1e7 1.339 0.50  # Young's Modulus   height  width
+
+4               # number of constraints 
+1 5 3 4         # list of dof specified to be zero
+
+1               # number of point loads
+7   5.0         # dof   load
+
+# FOR EXAMPLE ONLY
+# DO NOT USE THIS FILE AS INPUT
