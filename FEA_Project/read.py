@@ -157,7 +157,7 @@ def readLoads(inFile,outFile,numNodes : int) :
     
     return LoadArr
 
-def writeDisps(outFile,nodalDisp : np.ndarray,numNodes: int) :
+def reportResults(outFile,nodalDisp : np.ndarray,numNodes: int) :
     '''Writes formatted nodal displacement data into outFile
         
         Parameters
