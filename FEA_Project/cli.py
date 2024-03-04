@@ -19,7 +19,9 @@ def main():
     Beam1 = Beam(E,h,w,numNodes,elementList) # construct beam
     constraintList = readConstraints(inFile,outFile,numNodes) # list of constraints
     loadArr = readLoads(inFile,outFile,numNodes) # array of applied loads at each dof
-
+    nodalDisp = Beam1.solver(constraintList,loadArr) # solved nodal displacements for given beam, constraints, and loads
+    writeDisps(outFile,nodalDisp,numNodes)
+    
     # Close files
     inFile.close()
     outFile.close()
