@@ -145,7 +145,11 @@ def readLoads(inFile,outFile,numNodes : int) :
     # Create LoadArr
     LoadArr = np.zeros((numNodes*2,1),dtype=float)
     # get number of Point Loads
-    numLoads = int(inFile.readline().strip().split()[0])
+    ln = inFile.readline().strip().split()
+    if (len(ln) > 0) :
+        numLoads = int(ln[0])
+    else : 
+        numLoads = 0
     # Get number of Point Loads
     outFile.write("Point Loads:\n")
     for i in range(numLoads) :
