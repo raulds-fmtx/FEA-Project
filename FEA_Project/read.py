@@ -161,7 +161,7 @@ def readLoads(inFile,outFile,numNodes : int) :
     
     return LoadArr
 
-def reportResults(outFile,nodalDisp : np.ndarray,numNodes: int) :
+def reportResults(outFile,Beam1: Beam,constraintList : list,nodalDisp : np.ndarray,numNodes: int) :
     '''Writes formatted nodal displacement data into outFile
         
         Parameters
@@ -179,11 +179,28 @@ def reportResults(outFile,nodalDisp : np.ndarray,numNodes: int) :
             numpy array of applied loads at each dof
         '''
     
-    # Write header
-    outFile.write('Nodal Displacements:\n')
+    # Write element stiffness matrices
+    outFile.write('Local Stiffness Matrices:\n')
+    elementList = Beam1.getElementList()
+    EI = Beam1.getEI()
+    for i in range(len(elementList)):
+        KLstr = np.array2string(elementList[i].getElementK(EI),formatter={'float': lambda x: f'{x:.2e}'})
+        outFile.write(f'K_{i+1} =\n{KLstr}\n')
+    outFile.write('\n')
+    
+    # Write global stiffness matrices
+    outFile.write(f'Uconstrained Global Stiffness Matrix:\n')
+    KUstr = np.array2string(Beam1.getglobalK(),formatter={'float': lambda x: f'{x:.2e}'})
+    outFile.write(f'K =\n{KUstr}\n\n')
+    
+    outFile.write(f'Constrained Global Stiffness Matrix:\n')
+    KCstr = np.array2string(Beam1.imposeConstraints(constraintList),formatter={'float': lambda x: f'{x:.2e}'})
+    outFile.write(f'K =\n{KCstr}\n\n')
+    
     # Format Nodal Displacements
+    outFile.write('Nodal Displacements:\n')
     for i in range(numNodes):
-        disp1 = '{:.4e}'.format(nodalDisp[i*2,0])
-        disp2 = '{:.4e}'.format(nodalDisp[i*2+1,0])
-        outFile.write('{:>5} {:>11} {:>11}\n'.format(i+1,disp1,disp2))
+        disp1 = f'{nodalDisp[i*2,0]:.4e}'
+        disp2 = f'{nodalDisp[i*2+1,0]:.4e}'
+        outFile.write(f'{i+1:>5} {disp1:>11} {disp2:>11}\n')
     

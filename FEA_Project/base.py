@@ -153,6 +153,7 @@ class Beam:
     # getter methods
     def getglobalK(self) : return self.__globalK # returns unconstrained globalK matrix
     def getEI(self) : return self.__EI # returns EIzz
+    def getElementList(self) : return self.__memberList # returns memberList
     # public methods
     def imposeConstraints(self,constraintList : list):
         '''Adds 1e30 along indices at locations on the diagonal specified by constraintList
